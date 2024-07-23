@@ -38,7 +38,7 @@ jobs:
     - name: Deploy to EC2
       if: github.ref == 'refs/heads/main'
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_HOST }} 'cd /path/to/your/app && git pull && docker-compose up -d --build'
+        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_HOST }} 'cd /home/ec2-user/fastapi-template && git pull && docker-compose up -d --build'
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
