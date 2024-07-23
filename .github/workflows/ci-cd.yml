@@ -46,7 +46,17 @@ jobs:
     - name: Deploy to EC2
       if: github.ref == 'refs/heads/main'
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_HOST }} 'cd /home/ec2-user/fastapi-template && git pull && docker-compose up -d --build'
+        ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_HOST }} << EOF
+          cd /home/ec2-user/fastapi-template
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" > .env
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+          echo "AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}" >> .env
+          git pull
+          docker-compose up -d --build
+        EOF
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
