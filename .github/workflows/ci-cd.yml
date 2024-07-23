@@ -27,7 +27,7 @@ jobs:
     - name: Build and run tests
       run: |
         docker-compose up -d
-        docker-compose exec -T app sh -c "pip install pytest && pytest"
+        docker-compose exec -T app sh -c "pip install --no-cache-dir -r requirements.txt && pytest"
         docker-compose down
 
     - name: Deploy to EC2
