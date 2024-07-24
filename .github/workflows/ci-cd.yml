@@ -26,7 +26,7 @@ jobs:
 
     - name: Build and run tests
       run: |
-        docker-compose up -d
+        docker-compose up --build -d
         docker-compose exec -T app sh -c "pytest"
         docker-compose down
 
