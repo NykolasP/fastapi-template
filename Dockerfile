@@ -13,8 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copier le reste du code de l'application
 COPY . .
 
-# Définir les variables d'environnement pour utiliser l'environnement virtuel
-ENV PATH="/app/venv/bin:$PATH"
 
 # Commande pour lancer l'application
 CMD ["gunicorn", "-w", "1", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8000"]
