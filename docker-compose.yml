@@ -8,6 +8,7 @@ services:
       - .:/app
     working_dir: /app
     command: >
-      sh -c "pip install --no-cache-dir -r requirements.txt && gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000"
+      sh -c "pip install --no-cache-dir -r requirements.txt && gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000"
     ports:
       - "8000:8000"
+    mem_limit: 512m
