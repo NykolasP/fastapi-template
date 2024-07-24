@@ -33,9 +33,8 @@ jobs:
       run: |
         docker-compose up --build -d
         docker stats --no-stream
-        docker-compose logs app  # Add this line to get logs from the app container
-        docker-compose exec -T app sh -c "pytest > pytest_output.log 2>&1"
-        cat pytest_output.log
+        docker-compose exec -T app sh -c "pytest"
+        docker-compose logs app
 
   deploy:
     runs-on: ubuntu-latest
