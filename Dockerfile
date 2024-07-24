@@ -7,10 +7,9 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Installer les dépendances dans un environnement virtuel
-RUN python -m venv /app/venv && \
-    . /app/venv/bin/activate && \
-    pip install --no-cache-dir -r requirements.txt
-
+RUN python -m venv /app/venv
+RUN . /app/venv/bin/activate
+RUN pip install --no-cache-dir -r requirements.txt
 # Copier le reste du code de l'application
 COPY . .
 
