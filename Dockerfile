@@ -3,11 +3,13 @@ FROM python:3.8-slim
 # Créer un répertoire de travail
 WORKDIR /app
 
-# Copier le fichier requirements.txt et installer les dépendances
+# Copier le fichier requirements.txt
 COPY requirements.txt .
-RUN python -m venv /app/venv && \
-    . /app/venv/bin/activate && \
-    pip install --no-cache-dir -r requirements.txt
+
+# Installer les dépendances dans un environnement virtuel
+RUN python -m venv /app/venv
+RUN . /app/venv/bin/activate
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
