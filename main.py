@@ -31,6 +31,10 @@ dynamodb = boto3.resource(
 upload_table = dynamodb.Table('FileUpload')
 download_table = dynamodb.Table('FileDownload')
 
+@app.get("/ping")
+def ping():
+    return "pong"
+
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...), description: str = ""):
     try:

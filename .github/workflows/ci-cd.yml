@@ -33,8 +33,10 @@ jobs:
       run: |
         docker-compose up --build -d
         docker stats --no-stream
+        docker-compose logs app
         docker-compose exec -T app sh -c "pytest"
         docker-compose logs app
+        docker-compose down
 
   deploy:
     runs-on: ubuntu-latest
