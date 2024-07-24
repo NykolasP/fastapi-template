@@ -17,4 +17,4 @@ COPY . .
 ENV PATH="/app/venv/bin:$PATH"
 
 # Commande pour lancer l'application
-CMD ["gunicorn", "-w", "2", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "-w", "1", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8000"]
